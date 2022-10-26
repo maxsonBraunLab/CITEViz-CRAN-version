@@ -29,7 +29,7 @@ author:
     - affiliation:
         "Knight Cancer Institute, Oregon Health and Science University"
 
-package: CITEViz 0.99.8
+package: CITEViz 0.99.9.9000
 output:
     BiocStyle::html_document:
         toc: true
