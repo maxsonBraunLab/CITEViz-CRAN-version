@@ -24,7 +24,7 @@ library(CITEViz)
 run_app()
 ```
 
-CITEViz installation is currently facilitated with devtools, and the development team is working hard to submit the package to Bioconductor 3.16 with a release schedule of October 2022.
+CITEViz installation is currently facilitated with devtools, and the development team is working hard to submit the package to the Comprehensive R Archive Network (CRAN).
 
 ### Feature 1: Forward-Gates
 

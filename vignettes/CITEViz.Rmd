@@ -58,25 +58,26 @@ knitr::include_graphics("citeviz-logo-light-cropped.png")
 
 CITEViz is an R-Shiny program that allows users to classify cell clusters in CITE-Seq data by iteratively filtering the surface protein expression similar to flow cytometry. The most unique feature of CITEViz is the ability to physically gate cells, and the selected cells are immediately highlighted in dimension reduction space (e.g. UMAP, tSNE, PCA). This workflow provides rapid feedback to the users to assess cell cluster identity. Without CITEViz, the alternative workflow is to manually define and "jitter" gate boundaries (define four cutoff points), obtain the selected cell barcodes, re-plot the cells using a new set of antibody features, and re-filter the cells ad infinitum. By drawing physical gates to filter cells like in flow cytometry, CITEViz allows rapid exploration of cell clusters in CITE-Seq datasets.
 
-The motivation to develop CITEViz was to bring bench and computational biologists together to analyze CITE-Seq data. In our experience, CITEViz helps leverage the flow cytometry background of bench scientists to quickly and reliably classify cell clusters, which can then be further analyzed by computational scientists. To serve an audience of bench and computational biologists who are familiar with R the programming language, we submitted CITEViz to the BioConductor repository.
+The motivation to develop CITEViz was to bring bench and computational biologists together to analyze CITE-Seq data. In our experience, CITEViz helps leverage the flow cytometry background of bench scientists to quickly and reliably classify cell clusters, which can then be further analyzed by computational scientists. To serve an audience of bench and computational biologists who are familiar with R the programming language, we submitted CITEViz to the Comprehensive R Archive Network (CRAN).
 
 ## Installation
 
 Make sure you have R version **4.2.0** or later installed. We recommend installing CITEViz through the RStudio IDE using the following commands:
 
 ```{r installation, eval=FALSE}
-if (!require("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-
-BiocManager::install("CITEViz")
+install.packages("CITEViz")
 ```
 
 
 ## Data Input Format
 
-CITEViz accepts files in the **RDS (.rds) format**. The preferred RDS file should include a [Seurat](https://satijalab.org/seurat/) object or a [SingleCellExperiment](https://bioconductor.org/packages/release/bioc/html/SingleCellExperiment.html) object. If a list of a single `Seurat` object is used, only the object labeled "integrated" will be used. 
+CITEViz accepts files in the **RDS (.rds) format**. The preferred RDS file should include a [Seurat](https://satijalab.org/seurat/) object or a [SingleCellExperiment](https://bioconductor.org/packages/release/bioc/html/SingleCellExperiment.html) object. If a list of a single `Seurat` object is used, only the object labeled "integrated" will be used.
 
-The input `Seurat` or `SingleCellExperiment` object must contain cell embeddings data for **at least one dimensional reduction method** (e.g. PCA, UMAP, tSNE, etc.). If the object contains data for more than one reduction, each reduction must have a unique name. For a `SingleCellExperiment` object, the main experiment and any alternative experiments in the `SingleCellExperiment` object must contain assay count data stored as **"logcounts"** (log-transformed, normalized counts) or **"normcounts"** (normalized counts). Please refer to the [SingleCellExperiment](https://bioconductor.org/packages/release/bioc/html/SingleCellExperiment.html) reference manual on Bioconductor for help on how to determine the types of count data present in your SCE object. By default, CITEViz will use the logcounts for plotting expression data. If logcounts are not available, then CITEViz will use normcounts. If using a `SingleCellExperiment` object that was generated from Seurat-processed data or converted from a `Seurat` object, then the logcounts in the `SingleCellExperiment` object are analogous to the counts in the "data" slot for a given assay in a `Seurat` object.
+The input `Seurat` or `SingleCellExperiment` object must contain cell embeddings data for **at least one dimensional reduction method** (e.g. PCA, UMAP, tSNE, etc.). If the object contains data for more than one reduction, each reduction must have a unique name. 
+
+### `SingleCellExperiment` Compatibility
+
+For a `SingleCellExperiment` object, the main experiment and any alternative experiments in the `SingleCellExperiment` object must contain assay count data stored as **"logcounts"** (log-transformed, normalized counts) or **"normcounts"** (normalized counts). Please refer to the [SingleCellExperiment](https://bioconductor.org/packages/release/bioc/html/SingleCellExperiment.html) reference manual on Bioconductor for help on how to determine the types of count data present in your SCE object. By default, CITEViz will use the logcounts for plotting expression data. If logcounts are not available, then CITEViz will use normcounts. If using a `SingleCellExperiment` object that was generated from Seurat-processed data or converted from a `Seurat` object, then the logcounts in the `SingleCellExperiment` object are analogous to the counts in the "data" slot for a given assay in a `Seurat` object.
 
 ### Sample Data
 
